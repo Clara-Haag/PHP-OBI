@@ -57,10 +57,36 @@
 			
 			$cartas_lu = [$cartas[1],$cartas[2],$cartas[3]];
 			$cartas_edu = [$cartas[4],$cartas[5],$cartas[6]];
+			$pontos_lu = 0;
+			$pontos_edu = 0;
+			
 			foreach ($cartas_lu as $carta){  
-				echo "$carta <br/>";
+				global $val_dom, $val_norm, $naipe_dom, $pontos_lu;
+				
+				if ($carta[1] == $naipe_dom){
+					$pontos_lu += $val_dom[$carta[0]] ;
+				} else {
+					$pontos_lu += $val_norm[$carta[0]];
+				};
 			};
-			echo "Naipe dominante: $naipe_dom";
+			foreach ($cartas_edu as $carta){  
+				global $val_dom, $val_norm, $naipe_dom, $pontos_edu;
+				
+				if ($carta[1] == $naipe_dom){
+					$pontos_edu += $val_dom[$carta[0]] ;
+				} else {
+					$pontos_edu += $val_norm[$carta[0]];
+				};
+			};
+			
+			if ($pontos_lu > $pontos_edu){
+				echo "<p><strong>Luana é a vencedora!</strong></p>";
+			} elseif ($pontos_lu < $pontos_edu) {
+				echo "<p><strong>Edu é o vencedor!</strong></p>";
+			} else {
+				echo "<p><strong>Ocorreu um empate!</strong></p>";
+			};
+			echo "<p>Pontos da Luana: $pontos_lu</p><p>Pontos do Edu: $pontos_edu</p>";
 		};
 	?>
 </body>
